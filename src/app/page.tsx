@@ -2,6 +2,7 @@
 import { OpenAIChatModelId } from "@ai-sdk/openai/internal";
 import { useChat } from "ai/react";
 import { useState } from "react";
+import { Combobox } from "@/components/ui/combobox";
 
 export default function Home() {
   const { messages, input, handleSubmit, handleInputChange, isLoading } =
@@ -34,14 +35,14 @@ export default function Home() {
       </form>
 
       <div>
-        <select
-          name="assistant"
-          value={selectedAssistant}
-          onChange={(e) => setSelectedAssistant(e.target.value)}
-        >
-          <option value="gpt-4">Chat GPT-4</option>
-          <option value="deepseek-reasoner">DeepSeek R1</option>
-        </select>
+        <Combobox
+          onSelect={(value) => setSelectedAssistant(value)}
+          defaultValue="gpt-4"
+          options={[
+            { value: "gpt-4", label: "Chat GPT-4" },
+            { value: "deepseek-reasoner", label: "DeepSeek R1" },
+          ]}
+        />
       </div>
     </div>
   );
