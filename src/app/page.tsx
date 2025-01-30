@@ -1,16 +1,17 @@
 "use client";
-import { OpenAIChatModelId } from "@ai-sdk/openai/internal";
 import { useChat } from "ai/react";
 import { useState } from "react";
 import { Combobox } from "@/components/ui/combobox";
+import { AvailableModel } from "@/lib/types/models";
 
 export default function Home() {
   const { messages, input, handleSubmit, handleInputChange, isLoading } =
-    useChat();
+    useChat({
+      onFinish: () => {},
+    });
 
-  const [selectedAssistant, setSelectedAssistant] = useState<
-    OpenAIChatModelId | "deepseek-reasoner"
-  >("gpt-4");
+  const [selectedAssistant, setSelectedAssistant] =
+    useState<AvailableModel>("gpt-4");
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     handleSubmit(e, { data: { assistant: selectedAssistant } });
@@ -33,7 +34,6 @@ export default function Home() {
           disabled={isLoading}
         />
       </form>
-
       <div>
         <Combobox
           onSelect={(value) => setSelectedAssistant(value)}

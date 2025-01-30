@@ -1,9 +1,12 @@
+// layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 import "./globals.css";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,9 +29,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="h-full" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`h-full flex ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -36,8 +39,19 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ThemeToggle />
-          {children}
+          <SidebarProvider defaultOpen>
+            <AppSidebar />
+            <div className="flex w-full h-full">
+              <div className="border border-gray-700"></div>
+              <div className="flex-1 flex flex-col">
+                <ThemeToggle />
+                <div className="flex-1">
+                  <SidebarTrigger />
+                  {children}
+                </div>
+              </div>
+            </div>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
