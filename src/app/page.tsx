@@ -5,6 +5,9 @@ import { Combobox } from "@/components/ui/combobox";
 import { AvailableModel } from "@/lib/types/models";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function Home() {
   const { messages, input, handleSubmit, handleInputChange, isLoading } =
@@ -29,11 +32,53 @@ export default function Home() {
           { value: "deepseek-reasoner", label: "DeepSeek R1" },
         ]}
       />
-
       {messages.map((message) => (
         <div key={message.id}>
           <div>{message.role}</div>
-          <div>{message.content}</div>
+          <ReactMarkdown
+            components={{
+              h1({ ...props }) {
+                return <h1 className="text-3xl font-bold mb-8" {...props} />;
+              },
+              h2({ ...props }) {
+                return <h2 className="text-2xl font-bold mb-8" {...props} />;
+              },
+              h3({ ...props }) {
+                return <h3 className="text-xl font-bold mb-8" {...props} />;
+              },
+              li({ ...props }) {
+                return <li className="ml-4 list-disc space-y-4" {...props} />;
+              },
+              p({ ...props }) {
+                return <p className="mb-8" {...props} />;
+              },
+              a({ ...props }) {
+                return <a className="text-blue-500 underline" {...props} />;
+              },
+              ul({ ...props }) {
+                return <ul className="list-disc space-y-4 mb-8" {...props} />;
+              },
+
+              code({ inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    children={String(children).replace(/\n$/, "")}
+                    style={nord}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  />
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+          >
+            {message.content}
+          </ReactMarkdown>
         </div>
       ))}
 
