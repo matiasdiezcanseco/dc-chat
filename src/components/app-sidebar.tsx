@@ -18,7 +18,7 @@ export function AppSidebar() {
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Conversations</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {conversations.map((item) => (
