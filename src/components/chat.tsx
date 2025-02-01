@@ -16,7 +16,7 @@ const Chat: React.FC<MyComponentProps> = ({ messages }) => {
         return (
           <div
             key={message.id}
-            className={`rounded-full ${
+            className={`rounded-2xl ${
               isUserMessage
                 ? "bg-zinc-900 w-fit py-4 px-6 flex self-end"
                 : "text-left"

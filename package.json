@@ -31,6 +31,7 @@
     "react-syntax-highlighter": "^15.6.1",
     "rxdb": "^16.3.0",
     "tailwind-merge": "^2.6.0",
+    "tailwind-scrollbar": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
     "zustand": "^5.0.3"
