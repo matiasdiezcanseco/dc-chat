@@ -43,10 +43,12 @@ export default function RootLayout({
             <AppSidebar />
             <div className="flex w-full h-full">
               <div className="border border-gray-700"></div>
-              <div className="flex-1 flex flex-col">
+              <div className="flex-1 flex flex-col ">
                 {/* <ThemeToggle /> */}
-                <div className="flex-1">
-                  <SidebarTrigger />
+                <div className="flex-1 relative">
+                  <div className="absolute top-0 left-0">
+                    <SidebarTrigger />
+                  </div>
                   {children}
                 </div>
               </div>

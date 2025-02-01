@@ -18,12 +18,20 @@ export default function Home() {
     handleSubmit(e, { data: { assistant } });
   };
 
+  const hasMessages = messages.length > 0;
+
   return (
-    <div className="w-full flex flex-1 flex-col items-center justify-center">
-      <Chat messages={messages} />
+    <div className="h-full flex flex-col items-center justify-center w-[300px] md:w-[500px] lg:w-[700px] mx-auto relative ">
+      <div className={`w-full ${hasMessages ? "h-full" : ""}`}>
+        <Chat messages={messages} />
+      </div>
       <form
         onSubmit={handleSubmitForm}
-        className="flex items-center p-2 rounded-full shadow-md gap-4 min-w-[300px] md:min-w-[500px] lg:min-w-[700px]"
+        className={`flex p-2 shadow-md gap-4 w-full ${
+          hasMessages
+            ? "absolute bottom-0 left-1/2 transform -translate-x-1/2 "
+            : ""
+        } `}
       >
         <input
           type="text"
@@ -42,7 +50,6 @@ export default function Home() {
           <Send size={20} />
         </Button>
       </form>
-      <div></div>
     </div>
   );
 }
