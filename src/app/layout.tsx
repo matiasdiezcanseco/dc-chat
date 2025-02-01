@@ -44,7 +44,7 @@ export default function RootLayout({
             <div className="flex w-full h-full">
               <div className="border border-gray-700"></div>
               <div className="flex-1 flex flex-col">
-                <ThemeToggle />
+                {/* <ThemeToggle /> */}
                 <div className="flex-1">
                   <SidebarTrigger />
                   {children}
